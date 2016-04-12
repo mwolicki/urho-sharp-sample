@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "UrhoGame.Console", "UrhoGame.Console\UrhoGame.Console.fsproj", "{88201242-D043-443A-95DB-65AE1DFFB46E}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "UrhoGame.iOS", "UrhoHame.iOS\UrhoGame.iOS.fsproj", "{53726285-39D8-440A-81D6-BEBA65C60239}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "UrhoGame.iOS", "UrhoGame.iOS\UrhoGame.iOS.fsproj", "{53726285-39D8-440A-81D6-BEBA65C60239}"
 EndProject
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "UrhoGame.Lib", "UrhoGame.Lib\UrhoGame.Lib.fsproj", "{BDC9D5C6-9BE6-4F97-B9F2-0ECE0A44202A}"
 EndProject
