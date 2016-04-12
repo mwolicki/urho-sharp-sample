@@ -10,8 +10,7 @@ type GameApplication() =
     let mutable ball = null
     let rnd = new System.Random()
 
-    member __.next(maxValue) =
-        float32 <| rnd.NextDouble() * 2.0 * maxValue - maxValue
+    member __.next(maxValue) = float32 <| rnd.NextDouble() * 2.0 * maxValue - maxValue
 
     override self.Start() =
         let scene = new Scene()
