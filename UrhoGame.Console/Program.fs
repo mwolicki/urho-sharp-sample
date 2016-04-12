@@ -7,6 +7,6 @@ open Urho.Gui
 module main =
     [<EntryPoint>]
     let main args =
-        use app = new GameApplication()
+        use app = new GameApplication({ Move = fun input -> input.MouseMove })
         app.Run()
     

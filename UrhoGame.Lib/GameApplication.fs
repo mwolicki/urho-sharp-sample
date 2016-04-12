@@ -42,7 +42,11 @@ module GameKit =
                                      currPos.Z)
             node
 
-type GameApplication() = 
+type DeviceInput = {
+    Move: Input -> IntVector2
+}
+
+type GameApplication(input: DeviceInput) = 
     inherit Application(ApplicationOptions("Data"))
     let mutable ball = null
     let rnd = new System.Random()
@@ -89,5 +93,4 @@ type GameApplication() =
 
     override self.OnUpdate(timeStep) = 
         textElement.Value <- sprintf "FPS %f" (1.f/timeStep)
-
-        ball |> Sprite.movePosition self.Input.MouseMove |> ignore
+        ball |> Sprite.movePosition (input.Move self.Input) |> ignore
