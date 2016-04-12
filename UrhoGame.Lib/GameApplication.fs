@@ -48,12 +48,9 @@ type GameApplication() =
     let mutable ball2 = null
     let mutable time = 0.0f
     let rnd = new System.Random()
-    let mutable textElement : Text option = None
+    let mutable textElement : Text = null
 
-    member __.next(maxValue) =
-        float32 <| rnd.NextDouble() * 2.0 * maxValue - maxValue
-
-    
+    member __.next(maxValue) = rnd.NextDouble() * 2.0 * maxValue - maxValue |> float32
 
     override self.Start() =
         let scene = new Scene()
@@ -83,21 +80,20 @@ type GameApplication() =
         ball2<- Sprite.createChild "Urho2D/Ball.png" scene self.ResourceCache 
                |> Sprite.setPosition 0.f -3.f 0.f
                |> Sprite.setCollisionShape
-        ball2 |> Sprite.onCollision (fun args -> sprintf "%i vs %i" args.OtherNode.ID args.Body.Node.ID |> log) |> ignore
+        ball2 |> Sprite.onCollision (fun args -> sprintf "%i vs %i" args.OtherNode.ID args.Body.Node.ID |> log
+                                                 args.OtherNode.Remove()) |> ignore
 
 
-        let text = new Text(Value = "ptt", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center)
+        let text = new Text(Value = "text", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center)
         text.SetFont(self.ResourceCache.GetFont("Fonts/Anonymous Pro.ttf"), 15) |> ignore
         self.UI.Root.AddChild text
-        textElement <- Some text
+        textElement <- text
 
     override self.OnUpdate(timeStep) = 
         time <- time + timeStep
+
         let pos = self.Input.MousePosition
-        
-        if textElement.IsSome  then
-            textElement.Value.Value <- sprintf "FPS %f, %A" (1.f/timeStep) (pos)
+        textElement.Value <- sprintf "FPS %f, %A" (1.f/timeStep) (pos)
 
         ball2 |> Sprite.movePosition self.Input.MouseMove |> ignore
-        //ball |> GameKit.Sprite.setPosition (self.next 3.0) (self.next 3.0) 0.f |> ignore
         time <- 0.f
